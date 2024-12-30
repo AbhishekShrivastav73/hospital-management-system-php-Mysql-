@@ -36,12 +36,12 @@ function sidenav()
                         <li><a href="../doctors/dashboard.php" class="flex items-center space-x-2 text-lg"><i class="ri-dashboard-line"></i><span>Dashboard</span></a></li>
                         <li><a href="../doctors/my_records.php" class="flex items-center space-x-2 text-lg"><i class="ri-file-list-line"></i><span>My Appointments</span></a></li>
                         <li><a href="#" class="flex items-center space-x-2 text-lg"><i class="ri-file-text-line"></i><span>Medical Records</span></a></li>
-                        <li><a href="#" class="flex items-center space-x-2 text-lg"><i class="ri-calendar-line"></i><span>Schedule</span></a></li>
+                        <li><a href="../doctors/schedule.php" class="flex items-center space-x-2 text-lg"><i class="ri-calendar-line"></i><span>Schedule</span></a></li>
                     </ul>';
         } else {
             // User menu
             echo '<ul class="space-y-4">
-                        <li><a href="#" class="flex items-center space-x-2 text-lg"><i class="ri-dashboard-line"></i><span>Dashboard</span></a></li>
+                        <li><a href="../users/dashboard.php" class="flex items-center space-x-2 text-lg"><i class="ri-dashboard-line"></i><span>Dashboard</span></a></li>
                         <li><a href="../users/book_appointment.php" class="flex items-center space-x-2 text-lg"><i class="ri-heart-line"></i><span>Book Appointment</span></a></li>
                         <li><a href="../users/appointment_history.php" class="flex items-center space-x-2 text-lg"><i class="ri-history-line"></i><span>Appointment History</span></a></li>
                         <li><a href="#" class="flex items-center space-x-2 text-lg"><i class="ri-settings-3-line"></i><span>Settings</span></a></li>

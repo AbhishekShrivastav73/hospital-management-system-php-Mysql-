@@ -31,7 +31,7 @@ $email = $_SESSION['email'];
             <!-- Header -->
             <header class="flex items-center justify-between">
                 <h1 class="text-3xl font-bold text-gray-800">Welcome, <?php echo $username; ?></h1>
-                <a href="book_appointment.php" 
+                <a href="./book_appointment.php" 
                    class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600">
                     Book Appointment
                 </a>
@@ -87,3 +87,4 @@ $email = $_SESSION['email'];
 </body>
 
 </html>
+
