@@ -26,7 +26,7 @@ function sidenav()
             echo '<ul class="space-y-4 font-semibold">
                         <li><a href="../admin/admin_dashboard.php" class="flex items-center space-x-2 text-lg"><i class="ri-dashboard-line"></i><span>Dashboard</span></a></li>
                         <li><a href="../admin/add_doctor.php" class="flex items-center space-x-2 text-lg"><i class="ri-user-add-line"></i><span>Add Doctor</span></a></li>
-                        <li><a href="#" class="flex items-center space-x-2 text-lg"><i class="ri-hospital-line"></i><span>Manage Patients</span></a></li>
+                        <li><a href="../admin/manage_patients.php" class="flex items-center space-x-2 text-lg"><i class="ri-hospital-line"></i><span>Manage Patients</span></a></li>
                         <li><a href="#" class="flex items-center space-x-2 text-lg"><i class="ri-medical-line"></i><span>Manage Appointments</span></a></li>
                         <li><a href="#" class="flex items-center space-x-2 text-lg"><i class="ri-settings-5-line"></i><span>Settings</span></a></li>
                     </ul>';

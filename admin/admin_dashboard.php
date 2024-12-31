@@ -28,6 +28,20 @@ if ($result) {
 
 }
 
+$appointmentQuery = "SELECT COUNT(*) FROM appointments";
+
+$appointmentResult = mysqli_query($con, $appointmentQuery);
+
+if ($appointmentResult) {
+    
+    $totalAppointments = mysqli_fetch_array($appointmentResult)[0];
+
+} else {
+    $totalAppointments = 0;
+}   
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +82,7 @@ if ($result) {
                     <i class="ri-calendar-check-line text-green-500 text-3xl mr-4"></i>
                     <div>
                         <p class="text-gray-500">Total Appointments</p>
-                        <h2 class="text-xl font-bold">300</h2>
+                        <h2 class="text-xl font-bold"><?php echo $totalAppointments; ?></h2>
                     </div>
                 </div>
             </div>
@@ -79,11 +93,11 @@ if ($result) {
                     <i class="ri-user-add-line text-2xl mb-2"></i>
                     <p>Add Doctor</p>
                 </a>
-                <a href="managePatients.php" class="p-4 bg-green-500 hover:bg-green-600 text-white rounded-lg shadow-md text-center">
+                <a href="./manage_patients.php" class="p-4 bg-green-500 hover:bg-green-600 text-white rounded-lg shadow-md text-center">
                     <i class="ri-hospital-line text-2xl mb-2"></i>
                     <p>Manage Patients</p>
                 </a>
-                <a href="manageAppointments.php" class="p-4 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg shadow-md text-center">
+                <a href="#" class="p-4 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg shadow-md text-center">
                     <i class="ri-calendar-line text-2xl mb-2"></i>
                     <p>Manage Appointments</p>
                 </a>
