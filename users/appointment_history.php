@@ -73,7 +73,7 @@ mysqli_close($con);
                                     <td class="px-6 py-4 text-sm text-gray-900"><?php echo htmlspecialchars($appointment['specialization']); ?></td>
                                     <td class="px-6 py-4 text-sm text-gray-900"><?php echo htmlspecialchars($appointment['appointment_date']); ?></td>
                                     <td class="px-6 py-4 text-sm text-gray-900"><?php echo htmlspecialchars($appointment['appointment_time']); ?></td>
-                                    <td class="px-6 py-4 text-sm text-gray-900 capitalize"><?php echo htmlspecialchars($appointment['status']); ?></td>
+                                    <td class="px-6 py-4 text-sm text-gray-900 font-bold <?php echo $appointment['status'] === 'pending' ? 'text-yellow-500' : ($appointment['status'] === 'confirmed' ? 'text-green-500' : 'text-red-500'); ?> capitalize"><?php echo htmlspecialchars($appointment['status']); ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

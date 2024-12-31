@@ -23,7 +23,8 @@ if ($resultDoctors) {
             'id' => $row['id'],
             'name' => $row['name'],
             'email' => $row['email'],
-            'phone' => $row['phone']
+            'phone' => $row['phone'],
+            'availability' => $row['availability'],
         ];
     }
     mysqli_free_result($resultDoctors);
@@ -79,9 +80,11 @@ mysqli_close($con);
 
             const specializationDropdown = document.getElementById('specialization');
             const doctorDropdown = document.getElementById('doctor');
+            const available = document.querySelector('.condition');
 
             specializationDropdown.addEventListener('change', function () {
                 const selectedSpecialization = this.value;
+                // available.textContent =  specializations[selectedSpecialization].availability;
 
                 // Clear the doctor dropdown
                 doctorDropdown.innerHTML = '<option value="">Select a Doctor</option>';
@@ -91,8 +94,9 @@ mysqli_close($con);
                     specializations[selectedSpecialization].forEach(doctor => {
                         const option = document.createElement('option');
                         option.value = doctor.id;
-                        option.textContent = `${doctor.name} (${doctor.email} - ${doctor.phone})`;
+                        option.textContent = `${doctor.name} - ${doctor.availability}`;
                         doctorDropdown.appendChild(option);
+                        // available.textContent = `Appointment available for ${doctor.availability} - Rest will be considered as cancelled`;
                     });
                 }
             });
@@ -114,7 +118,7 @@ mysqli_close($con);
                     <div>
                         <label for="specialization" class="block text-sm font-medium text-gray-700">Specialization</label>
                         <select id="specialization" name="specialization" required
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                             <option value="">Select Specialization</option>
                             <?php foreach ($specializations as $key => $value) : ?>
                                 <option value="<?php echo $key; ?>"><?php echo $key; ?></option>
@@ -125,12 +129,12 @@ mysqli_close($con);
                     <div>
                         <label for="doctor" class="block text-sm font-medium text-gray-700">Doctor</label>
                         <select id="doctor" name="doctor" required
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                             <option value="">Select a Doctor</option>
                         </select>
                     </div>
                 </div>
-
+                <p class="condition text-orange-400"></p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label for="date" class="block text-sm font-medium text-gray-700">Appointment Date</label>

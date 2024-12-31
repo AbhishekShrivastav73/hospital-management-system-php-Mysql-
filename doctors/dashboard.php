@@ -1,5 +1,44 @@
 <?php
+session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'doctor') {
+    header("Location: ../login.php");
+    exit();
+}
+
 include '../components/sideNav.php';
+include '../api/db.php';
+
+$email = $_SESSION['email'];
+
+// Fetch doctor's data
+$doctorsData = "SELECT * FROM doctors WHERE email = '$email'";
+$resultS = mysqli_query($con, $doctorsData);
+
+if ($resultS) {
+    $doctor = mysqli_fetch_assoc($resultS);
+}
+
+// Fetch the user's email from the session
+$email = $_SESSION['email'];
+$sql = "SELECT * FROM appointments WHERE doctor_id = $doctor[id]";
+$result = mysqli_query($con, $sql);
+
+$appointments = [];
+$sql = "SELECT a.id, p.name, p.phone, a.appointment_date, a.appointment_time, a.status 
+        FROM appointments a 
+        JOIN patients p ON a.patient_id = p.id 
+        WHERE a.doctor_id = '$doctor[id]' AND a.status = 'confirmed'";
+
+$resultA = mysqli_query($con, $sql);
+
+if ($resultA) {
+    while ($row = mysqli_fetch_assoc($resultA)) {
+        $appointments[] = $row;
+    }
+}
+// echo json_encode($appointments);
+mysqli_close($con);
+
 ?>
 
 <!DOCTYPE html>
@@ -30,26 +69,32 @@ include '../components/sideNav.php';
                 <div class="col-span-1 bg-white p-6 rounded-lg shadow-md">
                     <h2 class="text-lg font-bold text-gray-800 mb-4">Upcoming Appointments</h2>
                     <ul class="space-y-4">
-                        <li class="flex justify-between items-center">
-                            <div>
-                                <p class="text-gray-800 font-semibold">John Doe</p>
-                                <p class="text-gray-600 text-sm">10:00 AM, 30th Dec</p>
-                            </div>
-                            <button class="text-indigo-600 hover:text-indigo-800">
-                                <i class="ri-arrow-right-line text-lg"></i>
-                            </button>
-                        </li>
-                        <li class="flex justify-between items-center">
-                            <div>
-                                <p class="text-gray-800 font-semibold">Jane Smith</p>
-                                <p class="text-gray-600 text-sm">11:30 AM, 30th Dec</p>
-                            </div>
-                            <button class="text-indigo-600 hover:text-indigo-800">
-                                <i class="ri-arrow-right-line text-lg"></i>
-                            </button>
-                        </li>
+                        <?php foreach ($appointments as $appointment) : ?>
+                            <li class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-gray-800 font-semibold"><?= $appointment['name'] ?></p>
+                                    <p class="text-gray-600 text-sm"><?= $appointment['appointment_date'] ?>, <?= $appointment['appointment_time'] ?></p>
+                                    
+                                    <div class="flex items-center gap-2">
+                                        <button class="text-indigo-600 hover:text-indigo-800">
+                                            
+                                        <?php if ($appointment['status'] === 'pending') :?>
+                                            <i class="ri-arrow-right-line text-lg"></i>
+                                            
+                                        <?php elseif ($appointment['status'] === 'cancelled') :?>
+                                            
+                                        <?php else :?>
+                                            
+                                        <?php endif;?>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <?php endforeach;?>
+
+                       
                         <li class="text-center text-indigo-600 hover:text-indigo-800">
-                            <a href="#">View All</a>
+                            <a href="./my_records.php">View All</a>
                         </li>
                     </ul>
                 </div>
@@ -82,7 +127,7 @@ include '../components/sideNav.php';
                     <h2 class="text-lg font-bold text-gray-800 mb-4">Quick Actions</h2>
                     <ul class="space-y-4">
                         <li>
-                            <a href="#" class="flex items-center text-gray-800 hover:text-indigo-600">
+                            <a href="./schedule.php" class="flex items-center text-gray-800 hover:text-indigo-600">
                                 <i class="ri-calendar-check-line text-lg mr-3"></i>
                                 Schedule an Appointment
                             </a>
