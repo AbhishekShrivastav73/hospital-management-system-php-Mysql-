@@ -57,7 +57,7 @@ mysqli_close($con);
                     <h2 class="text-xl font-semibold text-gray-700">Patient Appointments</h2>
                     <form action="" method="GET" class="flex items-center space-x-3">
                         
-                        <input  type="text" name="search" value="<?php echo htmlspecialchars($searchQuery); ?>" placeholder="Search by Patient or Doctor's name " class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                        <input  type="text" name="search" value="<?php echo htmlspecialchars($searchQuery); ?>" placeholder="Search by Patient or Doctor's name" class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
                         <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-300 hover:text-gray-800">
                             Search
                         </button>
@@ -83,12 +83,12 @@ mysqli_close($con);
                                 <?php foreach ($patients as $patient) : ?>
                                     <tr class="bg-white border-b hover:bg-gray-50">
                                         <td class="px-4 py-3"><?php echo $patient['id']; ?></td>
-                                        <td class="px-4 py-3"><?php echo $patient['username']; ?></td>
+                                        <td class="px-4 py-3 font-semibold"><?php echo $patient['username']; ?></td>
                                         <td class="px-4 py-3"><?php echo $patient['email']; ?></td>
                                         <td class="px-4 py-3"><?php echo $patient['phone']; ?></td>
                                         <td class="px-4 py-3"><?php echo $patient['appointment_date']; ?></td>
                                         <td class="px-4 py-3"><?php echo $patient['appointment_time']; ?></td>
-                                        <td class="px-4 py-3"><?php echo $patient['doctor_name']; ?></td>
+                                        <td class="px-4 py-3 font-semibold"><?php echo $patient['doctor_name']; ?></td>
                                         <td class="px-4 py-3">
                                             <span class="px-3 py-1 rounded-full text-white 
                                                 <?php echo $patient['status'] === 'confirmed' ? 'bg-green-500' : ($patient['status'] === 'pending' ? 'bg-yellow-500' : 'bg-red-500'); ?>">
